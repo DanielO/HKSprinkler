@@ -11,6 +11,7 @@ struct DEV_Valve : Service::Valve {
   SpanCharacteristic *inUse;
   SpanCharacteristic *valveType;
   SpanCharacteristic *setDuration;
+  SpanCharacteristic *remDuration;
   SpanCharacteristic *name;
 
  DEV_Valve(int valvePin, int _valveType, const char *_name) : Service::Valve() {
