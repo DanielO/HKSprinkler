@@ -1,0 +1,6 @@
+Sprinkler control Arduino sketch using HomeSpan
+https://github.com/HomeSpan/HomeSpan
+
+Written for the Lily TTGO LORA32 board (because I had it lying around)
+http://www.lilygo.cn/prod_view.aspx?TypeId=50060&Id=1326&FId=t3:50060:3
+
