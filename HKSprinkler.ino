@@ -8,6 +8,8 @@ void setup() {
   Serial.println("Setup");
 
   /* Setup our Home Span basics */
+  homeSpan.setStatusPin(2);
+  homeSpan.setControlPin(0);
   homeSpan.setMaxConnections(12);
   homeSpan.begin(Category::Sprinklers, "HomeSpan Sprinkler");
 
