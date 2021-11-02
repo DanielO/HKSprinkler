@@ -39,15 +39,20 @@ struct DEV_Valve : Service::Valve {
     digitalWrite(pin, LOW);
   }
 
+  /* Turn our valve on */
   void turnOn(void) {
     int duration;
 
+    /* Calculate stop time */
     duration = setDuration->getVal();
     startedAt = time;
     stopAt = time + duration;
+
+    /* Tell Home Kit we're on and what the duration is */
     active->setVal(true);
     inUse->setVal(true);
     remDuration->setVal(duration);
+
     on = true;
     Serial.print(nameptr);
     Serial.print(": Turning on for ");
@@ -56,15 +61,19 @@ struct DEV_Valve : Service::Valve {
     Serial.println(stopAt);
   }
 
+  /* Turn our valve off */
   void turnOff(void) {
     startedAt = stopAt = 0;
     on = false;
     Serial.print(nameptr);
     Serial.println(": Turning off");
+
+    /* Tell Home Kit we're off */
     inUse->setVal(false);
     active->setVal(false);
   }
 
+  /* Called by Home Space when Home Kit changes something */
   boolean update(void) {
     Serial.print(nameptr);
     Serial.print(": update, active: ");
@@ -76,6 +85,7 @@ struct DEV_Valve : Service::Valve {
     Serial.print(" setDuration: ");
     Serial.println(setDuration->getNewVal());
 
+    /* Handle turn on/off as required */
     if (active->getNewVal() && !on)
       turnOn();
 
@@ -85,6 +95,7 @@ struct DEV_Valve : Service::Valve {
     return(true);
   }
 
+  /* Update our uptime */
   void updateTime(void) {
     unsigned long m, delta, secs;
 
@@ -110,12 +121,15 @@ struct DEV_Valve : Service::Valve {
     time += secs;
   }
 
+  /* Called by Home Span each round */
   void loop(void) {
     updateTime();
 
+    /* Turn off our valve if the time is past */
     if (stopAt != 0 && time >= stopAt)
       turnOff();
 
+    /* Make sure hardware matches internal state */
     digitalWrite(pin, on);
   }
 };

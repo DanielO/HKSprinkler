@@ -7,11 +7,12 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Setup");
 
+  /* Setup our Home Span basics */
   homeSpan.setMaxConnections(12);
   homeSpan.begin(Category::Sprinklers, "HomeSpan Sprinkler");
 
+  /* Setup the accessory and required characteristics */
   new SpanAccessory();
-
   new Service::AccessoryInformation();
   new Characteristic::Name("Sprinklers");
   new Characteristic::Manufacturer("HomeSpan");
