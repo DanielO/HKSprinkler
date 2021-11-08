@@ -26,9 +26,11 @@ void setup() {
   new Service::HAPProtocolInformation();
   new Characteristic::Version("1.0.0");
 
-  new DEV_Valve(10, 1, "Front");
-  new DEV_Valve(11, 1, "Side");
-  new DEV_Valve(12, 1, "Beds");
+  /* Create valve controls */
+  new DEV_Valve(35, 1, "Pin 35");
+  new DEV_Valve(32, 1, "Pin 32");
+  new DEV_Valve(33, 1, "Pin 33");
+  new DEV_Valve(25, 1, "Pin 25");
 
   Serial.println("Done");
 }
