@@ -8,6 +8,7 @@ void setup() {
   Serial.println("Setup");
 
   /* Setup our Home Span basics */
+  homeSpan.enableOTA(false);
   homeSpan.setStatusPin(2);
   homeSpan.setControlPin(0);
   homeSpan.setMaxConnections(12);
