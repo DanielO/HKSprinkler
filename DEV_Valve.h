@@ -129,6 +129,10 @@ struct DEV_Valve : Service::Valve {
     if (stopAt != 0 && time >= stopAt)
       turnOff();
 
+    /* Update remaining duration, but don't force a notification to save traffic */
+    if (startedAt != 0 && stopAt != 0)
+      remDuration->setVal(stopAt - startedAt, false);
+
     /* Make sure hardware matches internal state */
     digitalWrite(pin, on);
   }
